@@ -1526,11 +1526,19 @@ func BenchmarkXXHash64_ASM(b *testing.B) {
 
 运⾏  ***go test -benchmem -bench  .  -v***   或  ***gotest -benchmem -bench=.  -v***  执行测试
 
+基础性能
+- -bench: 接收一个正则表达式, 匹配上的才能执行, 如: "."一个点表示运行所有的基准测试
+- -benchmem: 输出内存分配
 - -benchtime t  :  可以设置充⾜的测试次数，直到指定的测试时间。如果不是时间，⽽是倍数的话，指定的是测试次数，如 -benchtime 100x, 或者 -benchtime=3s，表示执行3秒
-- "."  :  一个点表示运行所有的基准测试
-- go test 会运行单元测试，为了防止单元测试的输出影响我们查看基准测试的结果，可以使用-run=匹配一个从来没有的单元测试方法，过滤掉单元测试的输出，我们这里使用none，因为我们基本上不会创建这个名字的单元测试方法, -run=none
 - -count=5  :  执⾏ benchmark 5 次
 - -cpu=4     :  执行使用 cpu 数量
+
+生成 profile 文件, 用于 pprof 工具分析
+- -cpuprofile=cpu.out
+- -memprofile=mem.put
+- -blockfile=block.out
+
+go test 会运行单元测试，为了防止单元测试的输出影响我们查看基准测试的结果，可以使用-run=匹配一个从来没有的单元测试方法，过滤掉单元测试的输出，我们这里使用none，因为我们基本上不会创建这个名字的单元测试方法, -run=none
 
 ### 5.2 并发benchmark
 
